@@ -11,5 +11,7 @@ class User(Base):
     last_name = Column(String(100), nullable=True)
     email = Column(String(255), unique=True, index=True)
     password = Column(String(255))
+    is_staff = Column(Boolean, default=False)
+    is_superuser = Column(Boolean, default=False)
     is_active = Column(Boolean, default=True)
     

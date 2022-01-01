@@ -16,7 +16,7 @@ router = APIRouter(
 
 @router.get("", response_model=List[UserRead])
 async def get_users_list(db: Session = Depends(get_db)):
-    users_list = await UserService(db).get_many()
+    users_list = UserService(db).get_many()
     return users_list
 
 
@@ -26,24 +26,24 @@ async def get_users_list(db: Session = Depends(get_db)):
     response_model=UserRead
 )
 async def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    user =  await UserService(db).create(user.dict())
+    user =  UserService(db).create(user.dict())
     return user
 
 
 @router.get("/{id}", response_model=UserRead)
 async def get_user(id: int, db: Session = Depends(get_db)):
-    user = await UserService(db).get_or_404(id)
+    user = UserService(db).get_or_404(id)
     return user
 
 
 @router.put("/{id}", response_model=UserRead)
 async def update_user(id: int, user: UserUpdate, db: Session = Depends(get_db)):
-    user = await UserService(db).update(id, user.dict())
+    user = UserService(db).update(id, user.dict())
     return user
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def get_user(id: int, db: Session = Depends(get_db)):
-    await UserService(db).delete(id)
+    UserService(db).delete(id)
 
 
